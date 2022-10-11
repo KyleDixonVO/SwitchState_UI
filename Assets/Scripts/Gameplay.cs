@@ -21,6 +21,7 @@ public class Gameplay : MonoBehaviour
     public TMP_Text tooltip;
     public TMP_Text progressTimer;
     public Slider packageManagerSlider;
+    public Slider loadTimeSlider;
 
     public string[] tooltips = new string[]
     {
@@ -47,10 +48,10 @@ public class Gameplay : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        packageManager = GameObject.Find("PackageManager");
-        tooltip = GameObject.Find("Tooltip").GetComponent<TMP_Text>();
-        progressTimer = GameObject.Find("Progress Timer").GetComponent<TMP_Text>();
-        packageManagerSlider = GameObject.Find("packageManagerSlider").GetComponent<Slider>();
+        //packageManager = GameObject.Find("PackageManager");
+        //tooltip = GameObject.Find("Tooltip").GetComponent<TMP_Text>();
+        //progressTimer = GameObject.Find("Progress Timer").GetComponent<TMP_Text>();
+        //packageManagerSlider = GameObject.Find("packageManagerSlider").GetComponent<Slider>();
         endTime = minLoadTime;
         unityOpen = false;
         unityStartTimeCaptured = false;
@@ -70,6 +71,7 @@ public class Gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        endTime = loadTimeSlider.value;
         if (unityOpen == false) return;
         random = Random.Range(0, 500);
         if (random == 1)

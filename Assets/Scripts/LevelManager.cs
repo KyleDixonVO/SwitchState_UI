@@ -97,6 +97,11 @@ public class LevelManager : MonoBehaviour
         gameplay.Reset();
     }
 
+    public void SwitchCredits()
+    {
+        state = UI_States.credits;
+    }
+
     public void EvaluateSwitch()
     {
         switch (state)

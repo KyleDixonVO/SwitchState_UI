@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UI_Manager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class UI_Manager : MonoBehaviour
     public Canvas gameover;
     public Canvas gameplay;
     public Canvas credits;
+    public Slider slider;
+    public TMP_Text loadTimeText;
 
     // Start is called before the first frame update
 
@@ -27,12 +31,13 @@ public class UI_Manager : MonoBehaviour
 
     void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        loadTimeText.text = slider.value.ToString();
     }
 
     public void MainMenu()
