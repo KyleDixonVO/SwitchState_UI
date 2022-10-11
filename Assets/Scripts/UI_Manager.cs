@@ -11,6 +11,7 @@ public class UI_Manager : MonoBehaviour
     public Canvas gameover;
     public Canvas gameplay;
     public Canvas credits;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -26,7 +27,6 @@ public class UI_Manager : MonoBehaviour
 
     void Start()
     {
-
     }
 
     // Update is called once per frame

@@ -24,6 +24,7 @@ public class LevelManager : MonoBehaviour
     public UI_States returnFromOptions;
 
     public UI_Manager ui_Manager;
+    public Gameplay gameplay;
 
     public InputManager inputManager;
 
@@ -31,6 +32,7 @@ public class LevelManager : MonoBehaviour
     {
         ui_Manager = GameObject.Find("UI_Manager").GetComponent<UI_Manager>();
         inputManager = GameObject.Find("InputManager").GetComponent<InputManager>();
+        gameplay = GameObject.Find("GameplayManager").GetComponent<Gameplay>();
         state = UI_States.mainMenu;
         Time.timeScale = resumedScale;
     }
@@ -64,6 +66,11 @@ public class LevelManager : MonoBehaviour
             state = UI_States.gameover;
         }
 
+        if (state == UI_States.gameplay && gameplay.winGame)
+        {
+            state = UI_States.win;
+        }
+
         EvaluateSwitch();
     }
 
@@ -87,6 +94,7 @@ public class LevelManager : MonoBehaviour
     public void SwitchMainMenu()
     {
         state = UI_States.mainMenu;
+        gameplay.Reset();
     }
 
     public void EvaluateSwitch()
