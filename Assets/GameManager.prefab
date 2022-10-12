@@ -54,6 +54,7 @@ MonoBehaviour:
   tooltip: {fileID: 120189650}
   progressTimer: {fileID: 314304496}
   packageManagerSlider: {fileID: 738310623}
+  loadTimeSlider: {fileID: 89727553}
   tooltips:
   - Making a coffee
   - Learning to knit
@@ -363,6 +364,17 @@ PrefabInstance:
       objectReference: {fileID: 7514716541674813405}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d61cd2c66efa484ea2e95c767e7b134, type: 3}
+--- !u!114 &89727553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1057382944, guid: 4d61cd2c66efa484ea2e95c767e7b134, type: 3}
+  m_PrefabInstance: {fileID: 979320929}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &120189650 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1031189171, guid: 4d61cd2c66efa484ea2e95c767e7b134, type: 3}
