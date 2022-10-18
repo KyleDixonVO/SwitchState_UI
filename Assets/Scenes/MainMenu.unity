@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &368718831 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7514716541674813405, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
+  m_PrefabInstance: {fileID: 559836889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f8654ffcbbf0746be890cc132ff28d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &559836889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,6 +145,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1241628040, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
+      propertyPath: m_Color.a
+      value: 0.54901963
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338407150, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 368718831}
     - target: {fileID: 1413450154, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -153,6 +172,10 @@ PrefabInstance:
     - target: {fileID: 2076864376, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801829749310284318, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8860434123062861725, guid: 9610e2fdb9e8d9945bb8e39b00cedec1, type: 3}
       propertyPath: m_RootOrder

@@ -59,7 +59,7 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = false;
         credits.enabled = false;
-        gameplay.enabled = false;
+        gameplay.enabled = true;
     }
 
     public void Options()

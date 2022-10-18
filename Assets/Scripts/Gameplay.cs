@@ -22,6 +22,7 @@ public class Gameplay : MonoBehaviour
     public TMP_Text progressTimer;
     public Slider packageManagerSlider;
     public Slider loadTimeSlider;
+    public LevelManager levelManager;
 
     public string[] tooltips = new string[]
     {
@@ -71,7 +72,10 @@ public class Gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (levelManager.state == LevelManager.UI_States.pause) return;
+
         endTime = loadTimeSlider.value;
+
         if (unityOpen == false) return;
         random = Random.Range(0, 500);
         if (random == 1)
