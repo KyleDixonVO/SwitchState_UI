@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public GameObject healthBar;
     public GameObject regularBoringHealthBar;
     public Slider boringHealthSlider;
-    public Slider slider;
     public Gradient grad;
     public Color color;
     public float startingWidth;
     public int maxHealth;
     public int health;
+    public bool invincible;
+    public float cooldownTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +23,6 @@ public class HealthBar : MonoBehaviour
         health = maxHealth;
         boringHealthSlider.maxValue = maxHealth;
         boringHealthSlider.value = health;
-        slider.maxValue = maxHealth;
-        slider.value = health;
-        healthBar.GetComponent<Image>().color = grad.Evaluate(1.0f);
         regularBoringHealthBar.GetComponent<Image>().color = grad.Evaluate(1.0f);
     }
 
@@ -34,32 +31,32 @@ public class HealthBar : MonoBehaviour
     {
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(5);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TakeDamage(5);
+        //}
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Heal(5);
-        }
-        slider.value = health;
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    Heal(5);
+        //}
         boringHealthSlider.value = health;
-        color = grad.Evaluate(slider.normalizedValue);
-        healthBar.GetComponent<Image>().color = color;
+        color = grad.Evaluate(boringHealthSlider.normalizedValue);
         regularBoringHealthBar.GetComponent<Image>().color = color;
     }
 
-    void TakeDamage(int damage)
-    { 
+    public void TakeDamage(int damage)
+    {
+        if (invincible) return;
         health -= damage;
+        StartCoroutine(attackCooldown(cooldownTimer));
         if (health < 0)
         {
             health = 0;
         }
     }
 
-    void Heal(int healing)
+    public void Heal(int healing)
     {
         health += healing;
         if (health > maxHealth)
@@ -67,4 +64,12 @@ public class HealthBar : MonoBehaviour
             health = maxHealth;
         }
     }
+
+    IEnumerator attackCooldown(float cooldownTime)
+    {
+        invincible = true;
+        yield return new WaitForSeconds(cooldownTime);
+        invincible = false;
+    }
+
 }
