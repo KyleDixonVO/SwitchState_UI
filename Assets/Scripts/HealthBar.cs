@@ -40,6 +40,7 @@ public class HealthBar : MonoBehaviour
         //{
         //    Heal(5);
         //}
+
         boringHealthSlider.value = health;
         color = grad.Evaluate(boringHealthSlider.normalizedValue);
         regularBoringHealthBar.GetComponent<Image>().color = color;

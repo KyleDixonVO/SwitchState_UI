@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour
         Attack();
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
         if (health < 0)
@@ -73,6 +73,7 @@ public class EnemyController : MonoBehaviour
 
     void UpdateAnimationReferences()
     {
+        Debug.Log(gameObject.GetComponent<NavMeshAgent>().velocity.magnitude);
         gameObject.transform.GetComponentInChildren<Animator>().SetFloat("speed", gameObject.GetComponent<NavMeshAgent>().velocity.magnitude);
         gameObject.transform.GetComponentInChildren<Animator>().SetFloat("health", health);
         gameObject.transform.GetComponentInChildren<Animator>().SetFloat("distanceFromPlayer", Vector3.Distance(gameObject.transform.position, player.transform.position));
@@ -80,13 +81,23 @@ public class EnemyController : MonoBehaviour
 
     void Navigate()
     {
-        if (Vector3.Distance(gameObject.transform.position, player.transform.position) > 60 || health == 0 || Vector3.Distance(gameObject.transform.position, player.transform.position) < gameObject.GetComponent<NavMeshAgent>().stoppingDistance)
+        if (Vector3.Distance(gameObject.transform.position, player.transform.position) > 60 || Vector3.Distance(gameObject.transform.position, player.transform.position) < gameObject.GetComponent<NavMeshAgent>().stoppingDistance)
         {
-            gameObject.GetComponent<NavMeshAgent>().SetDestination(gameObject.transform.position);
+            Debug.Log("Stopped" + gameObject.GetComponent<NavMeshAgent>().destination);
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
+        }
+        else if (health == 0)
+        {
+            Debug.Log("Dead");
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            gameObject.transform.GetComponentInChildren<Canvas>().enabled = false;
+            gameObject.GetComponent<Rigidbody>().detectCollisions = false;
         }
         else
         {
+            Debug.Log("Tracking Player");
+            gameObject.GetComponent<NavMeshAgent>().enabled = true;
             gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
         }
     }
