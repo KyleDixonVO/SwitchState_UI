@@ -9,6 +9,7 @@ public enum MenuStyle{
 public class GunInventory : MonoBehaviour {
 	[Tooltip("Current weapon gameObject.")]
 	public GameObject currentGun;
+	public GameObject hud_Bullets;
 	private Animator currentHAndsAnimator;
 	private int currentGunCounter = 0;
 
@@ -52,7 +53,6 @@ public class GunInventory : MonoBehaviour {
 		if(switchWeaponCooldown > 1.2f && Input.GetKey(KeyCode.LeftShift) == false){
 			Create_Weapon();
 		}
-
 	}
 
 
@@ -83,7 +83,8 @@ public class GunInventory : MonoBehaviour {
 		/*
 		 * Scrolling wheel waepons changing
 		 */
-		if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0){
+
+		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetAxis("Mouse ScrollWheel") > 0){
 			switchWeaponCooldown = 0;
 
 			currentGunCounter++;
@@ -91,6 +92,7 @@ public class GunInventory : MonoBehaviour {
 				currentGunCounter = 0;
 			}
 			StartCoroutine("Spawn",currentGunCounter);
+
 		}
 		if(Input.GetKeyDown(KeyCode.DownArrow) || Input.GetAxis("Mouse ScrollWheel") < 0){
 			switchWeaponCooldown = 0;
@@ -123,12 +125,17 @@ public class GunInventory : MonoBehaviour {
 	 * It will check if we carry a gun and destroy it, and its then going to load a gun prefab from our Resources Folder.
 	 */
 	IEnumerator Spawn(int _redniBroj){
+
+
 		if (weaponChanging)
 			weaponChanging.Play ();
 		else
 			print ("Missing Weapon Changing music clip.");
 		if(currentGun){
-			if(currentGun.name.Contains("Gun")){
+
+			hud_Bullets.transform.parent = gameObject.transform;
+			hud_Bullets.SetActive(false);
+			if (currentGun.name.Contains("Gun")){
 
 				currentHAndsAnimator.SetBool("changingWeapon", true);
 
@@ -160,7 +167,13 @@ public class GunInventory : MonoBehaviour {
 			AssignHandsAnimator(currentGun);
 		}
 
-
+		if (currentGun != null)
+		{
+			hud_Bullets.transform.parent = currentGun.transform;
+			hud_Bullets.transform.localPosition = new Vector3(0, 0, -0.22f);
+			hud_Bullets.transform.rotation = currentGun.transform.rotation;
+			hud_Bullets.SetActive(true);
+		}
 	}
 
 

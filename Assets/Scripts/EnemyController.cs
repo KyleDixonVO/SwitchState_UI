@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         //healthBar = GameObject.Find("Fill");
         maxHealth = 100;
+        damage = 10;
         health = maxHealth;
         slider.maxValue = maxHealth;
         slider.value = health;
@@ -73,7 +74,7 @@ public class EnemyController : MonoBehaviour
 
     void UpdateAnimationReferences()
     {
-        Debug.Log(gameObject.GetComponent<NavMeshAgent>().velocity.magnitude);
+        //Debug.Log(gameObject.GetComponent<NavMeshAgent>().velocity.magnitude);
         gameObject.transform.GetComponentInChildren<Animator>().SetFloat("speed", gameObject.GetComponent<NavMeshAgent>().velocity.magnitude);
         gameObject.transform.GetComponentInChildren<Animator>().SetFloat("health", health);
         gameObject.transform.GetComponentInChildren<Animator>().SetFloat("distanceFromPlayer", Vector3.Distance(gameObject.transform.position, player.transform.position));
@@ -83,20 +84,20 @@ public class EnemyController : MonoBehaviour
     {
         if (Vector3.Distance(gameObject.transform.position, player.transform.position) > 60 || Vector3.Distance(gameObject.transform.position, player.transform.position) < gameObject.GetComponent<NavMeshAgent>().stoppingDistance)
         {
-            Debug.Log("Stopped" + gameObject.GetComponent<NavMeshAgent>().destination);
+            //Debug.Log("Stopped" + gameObject.GetComponent<NavMeshAgent>().destination);
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             gameObject.GetComponent<NavMeshAgent>().velocity = Vector3.zero;
         }
         else if (health == 0)
         {
-            Debug.Log("Dead");
+            //Debug.Log("Dead");
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             gameObject.transform.GetComponentInChildren<Canvas>().enabled = false;
             gameObject.GetComponent<Rigidbody>().detectCollisions = false;
         }
         else
         {
-            Debug.Log("Tracking Player");
+            //Debug.Log("Tracking Player");
             gameObject.GetComponent<NavMeshAgent>().enabled = true;
             gameObject.GetComponent<NavMeshAgent>().SetDestination(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
         }

@@ -523,7 +523,7 @@ public class GunScript : MonoBehaviour {
 			}
 		}
 		if(mls && HUD_bullets)
-			HUD_bullets.text = bulletsIHave.ToString() + " - " + bulletsInTheGun.ToString();
+			HUD_bullets.text = bulletsInTheGun.ToString();
 
 		DrawCrosshair();
 	}
