@@ -25,7 +25,7 @@ public class UI_Manager : MonoBehaviour
         options = GameObject.Find("OptionsCanvas").GetComponent<Canvas>();
         win = GameObject.Find("WinCanvas").GetComponent<Canvas>();
         gameover = GameObject.Find("GameoverCanvas").GetComponent<Canvas>();
-        gameplay = GameObject.Find("GameplayCanvas").GetComponent<Canvas>();
+        //gameplay = GameObject.Find("GameplayCanvas").GetComponent<Canvas>();
         credits = GameObject.Find("CreditsCanvas").GetComponent<Canvas>();
     }
 
@@ -48,7 +48,10 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = false;
         credits.enabled = false;
-        gameplay.enabled = false;
+        if (gameplay != null)
+        {
+            gameplay.enabled = false;
+        }
     }
 
     public void Pause()
@@ -59,7 +62,10 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = false;
         credits.enabled = false;
-        gameplay.enabled = true;
+        if (gameplay != null)
+        {
+            gameplay.enabled = false;
+        }
     }
 
     public void Options()
@@ -70,7 +76,10 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = false;
         credits.enabled = false;
-        gameplay.enabled = false;
+        if (gameplay != null)
+        {
+            gameplay.enabled = false;
+        }
     }
 
     public void Credits()
@@ -81,7 +90,10 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = false;
         credits.enabled = true;
-        gameplay.enabled = false;
+        if (gameplay != null)
+        {
+            gameplay.enabled = false;
+        }
     }
 
     public void Gameplay()
@@ -92,7 +104,11 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = false;
         credits.enabled = false;
-        gameplay.enabled = true;
+        gameplay = GameObject.Find("GameplayCanvas").GetComponent<Canvas>();
+        if (gameplay != null)
+        {
+            gameplay.enabled = true;
+        }
     }
 
     public void Win()
@@ -103,7 +119,10 @@ public class UI_Manager : MonoBehaviour
         win.enabled = true;
         gameover.enabled = false;
         credits.enabled = false;
-        gameplay.enabled = false;
+        if (gameplay != null)
+        {
+            gameplay.enabled = false;
+        }
     }
 
     public void Gameover()
@@ -114,7 +133,10 @@ public class UI_Manager : MonoBehaviour
         win.enabled = false;
         gameover.enabled = true;
         credits.enabled = false;
-        gameplay.enabled = false;
+        if (gameplay != null)
+        {
+            gameplay.enabled = false;
+        }
     }
 
 

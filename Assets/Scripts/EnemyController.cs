@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-
+    public LevelManager levelManager;
     public GameObject healthBar;
     public Slider slider;
     public Gradient grad;
@@ -16,10 +16,13 @@ public class EnemyController : MonoBehaviour
     public int health;
     public int damage;
     private GameObject player;
+    private bool updatedKillCount;
 
     // Start is called before the first frame update
     void Start()
     {
+        updatedKillCount = false;
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         //healthBar = GameObject.Find("Fill");
         maxHealth = 100;
         damage = 10;
@@ -33,10 +36,18 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (levelManager.state != LevelManager.UI_States.gameplay) return;
         UpdateHealthBar();
         Navigate();
         UpdateAnimationReferences();
         Attack();
+
+        if (updatedKillCount == false && health == 0)
+        {
+            Debug.Log("increasing kill count");
+            player.GetComponent<HealthBar>().zombiesKilled++;
+            updatedKillCount = true;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -59,6 +70,7 @@ public class EnemyController : MonoBehaviour
 
     void Attack()
     {
+        if (health <= 0) return;
         if (Vector3.Distance(gameObject.transform.position, player.transform.position) <= gameObject.GetComponent<NavMeshAgent>().stoppingDistance + 0.5)
         {
             player.GetComponent<HealthBar>().TakeDamage(damage);

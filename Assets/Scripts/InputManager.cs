@@ -20,23 +20,5 @@ public class InputManager : MonoBehaviour
         {
             EscapePressed = !EscapePressed;
         }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            Win = true;
-        }
-        else
-        {
-            Win = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Lose = true;
-        }
-        else
-        {
-            Lose = false;
-        }
     }
 }

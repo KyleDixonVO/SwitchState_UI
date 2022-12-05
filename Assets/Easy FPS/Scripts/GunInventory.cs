@@ -7,6 +7,7 @@ public enum MenuStyle{
 }
 
 public class GunInventory : MonoBehaviour {
+	public LevelManager levelManager;
 	[Tooltip("Current weapon gameObject.")]
 	public GameObject currentGun;
 	public GameObject hud_Bullets;
@@ -48,7 +49,7 @@ public class GunInventory : MonoBehaviour {
 	 * overcomes 0.0f. 
 	 */
 	void Update(){
-
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		switchWeaponCooldown += 1 * Time.deltaTime;
 		if(switchWeaponCooldown > 1.2f && Input.GetKey(KeyCode.LeftShift) == false){
 			Create_Weapon();
@@ -191,8 +192,8 @@ public class GunInventory : MonoBehaviour {
 	 * From here I am listing thourhg guns I have and drawing corresponding images on the sceen.
 	 */
 	void OnGUI(){
-
-		if(currentGun){
+		if (levelManager.state != LevelManager.UI_States.gameplay) return;
+		if (currentGun){
 			for(int i = 0; i < gunsIHave.Count; i++){
 				DrawCorrespondingImage(i);
 			}

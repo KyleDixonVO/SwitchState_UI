@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public Gameplay gameplayManager;
     public List<GameObject> enemyList;
     public int maxEnemies;
     public float lowerBoundsX;
@@ -18,11 +19,13 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameplayManager = GameObject.Find("GameplayManager").GetComponent<Gameplay>();
+        maxEnemies = (int)gameplayManager.zombieSlider.value;
         for (int i = 0; i < maxEnemies; i++)
         {
             int spawnPoint = Random.Range(0, spawnPoints.Count);
             GameObject temp = Instantiate(enemyPrefab, new Vector3((spawnPoints[spawnPoint].transform.position.x + Random.Range(-2, 2)), spawnPoints[spawnPoint].transform.position.y, (spawnPoints[spawnPoint].transform.position.z + Random.Range(-2, 2))), gameObject.transform.rotation);
-            Debug.Log(spawnPoint);
+            //Debug.Log(spawnPoint);
             enemyList.Add(temp);
         }
     }
@@ -38,7 +41,7 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < enemyList.Count; i++)
         {
             int spawnPoint = Random.Range(0, spawnPoints.Count);
-            Debug.Log(spawnPoint);
+            //Debug.Log(spawnPoint);
             enemyList[i].transform.position = new Vector3(spawnPoints[spawnPoint].transform.position.x + Random.Range(-2, 2), spawnPoints[spawnPoint].transform.position.y, spawnPoints[spawnPoint].transform.position.z + Random.Range(-2, 2));
         }
     }

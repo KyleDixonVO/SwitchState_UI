@@ -6,6 +6,7 @@ public enum GunStyles{
 	nonautomatic,automatic
 }
 public class GunScript : MonoBehaviour {
+	public LevelManager levelManager;
 	[Tooltip("Selects type of waepon to shoot rapidly or one bullet per click.")]
 	public GunStyles currentStyle;
 	[HideInInspector]
@@ -36,7 +37,7 @@ public class GunScript : MonoBehaviour {
 	 * Collection the variables upon awake that we need.
 	 */
 	void Awake(){
-
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
 		mls = GameObject.FindGameObjectWithTag("Player").GetComponent<MouseLookScript>();
 		player = mls.transform;
@@ -81,6 +82,8 @@ public class GunScript : MonoBehaviour {
 	Update loop calling for methods that are descriped below where they are initiated.
 	*/
 	void Update(){
+
+		if (levelManager.state != LevelManager.UI_States.gameplay) return;
 
 		Animations();
 
@@ -514,6 +517,7 @@ public class GunScript : MonoBehaviour {
 	[Tooltip("HUD bullets to display bullet count on screen. Will be find under name 'HUD_bullets' in scene.")]
 	public TextMesh HUD_bullets;
 	void OnGUI(){
+		if (levelManager.state != LevelManager.UI_States.gameplay) return;
 		if(!HUD_bullets){
 			try{
 				HUD_bullets = GameObject.Find("HUD_bullets").GetComponent<TextMesh>();
@@ -531,7 +535,7 @@ public class GunScript : MonoBehaviour {
 	[Header("Crosshair properties")]
 	public Texture horizontal_crosshair, vertical_crosshair;
 	public Vector2 top_pos_crosshair, bottom_pos_crosshair, left_pos_crosshair, right_pos_crosshair;
-	public Vector2 size_crosshair_vertical = new Vector2(1,1), size_crosshair_horizontal = new Vector2(1,1);
+	public Vector2 size_crosshair_vertical = new Vector2(.5f,.5f), size_crosshair_horizontal = new Vector2(.5f,.5f);
 	[HideInInspector]
 	public Vector2 expandValues_crosshair;
 	private float fadeout_value = 1;

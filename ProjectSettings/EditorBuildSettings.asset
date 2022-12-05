@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: 19a61169e4975c443b42fcabc05143aa
+  - enabled: 1
+    path: Assets/Scenes/FollowBar.unity
+    guid: 1943d1ef6b18cbd4cbd3c93aa08c242a
   m_configObjects: {}

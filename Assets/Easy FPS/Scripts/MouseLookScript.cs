@@ -3,13 +3,14 @@ using System.Collections;
 
 
 public class MouseLookScript : MonoBehaviour {
-
+	public LevelManager levelManager;
 	[HideInInspector]
 	public Transform myCamera;
 	/*
 	 * Hiding the cursor.
 	 */
 	void Awake(){
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		Cursor.lockState = CursorLockMode.Locked;
 		myCamera = GameObject.FindGameObjectWithTag("MainCamera").transform;
 	}
@@ -19,13 +20,22 @@ public class MouseLookScript : MonoBehaviour {
 	* Triggering the headbob camera omvement if player is faster than 1 of speed
 	*/
 	void  Update(){
+		if (levelManager.state != LevelManager.UI_States.gameplay)
+        {
+			Cursor.lockState = CursorLockMode.None;
+			return;
+        }
+        else
+        {
+			Cursor.lockState = CursorLockMode.Locked;
+        }
 
 		MouseInputMovement();
 
-		if (Input.GetKeyDown (KeyCode.L)) {
-			Cursor.lockState = CursorLockMode.Locked;
+		//if (Input.GetKeyDown (KeyCode.L)) {
+		//	Cursor.lockState = CursorLockMode.Locked;
 
-		}
+		//}
 		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 
 		if(GetComponent<PlayerMovementScript>().currentSpeed > 1)
@@ -67,7 +77,7 @@ public class MouseLookScript : MonoBehaviour {
 * If aiming set the mouse sensitvity from our variables and vice versa.
 */
 void FixedUpdate(){
-
+	if (levelManager.state != LevelManager.UI_States.gameplay) return;
 	/*
 	 * Reduxing mouse sensitvity if we are aiming.
 	 */

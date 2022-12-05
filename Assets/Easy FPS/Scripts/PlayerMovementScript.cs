@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementScript : MonoBehaviour {
 	Rigidbody rb;
-
+	public LevelManager levelManager;
 	[Tooltip("Current players speed")]
 	public float currentSpeed;
 	[Tooltip("Assign players camera here")]
@@ -23,7 +23,7 @@ public class PlayerMovementScript : MonoBehaviour {
 		cameraMain = transform.Find("Main Camera").transform;
 		bulletSpawn = cameraMain.Find ("BulletSpawn").transform;
 		ignoreLayer = 1 << LayerMask.NameToLayer ("Player");
-
+		levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 	}
 	private Vector3 slowdownV;
 	private Vector2 horizontalMovement;
@@ -31,6 +31,7 @@ public class PlayerMovementScript : MonoBehaviour {
 	* Raycasting for meele attacks and input movement handling here.
 	*/
 	void FixedUpdate(){
+		if (levelManager.state != LevelManager.UI_States.gameplay) return;
 		RaycastForMeleeAttacks ();
 
 		PlayerMovementLogic ();
@@ -91,7 +92,7 @@ public class PlayerMovementScript : MonoBehaviour {
 	* Update loop calling other stuff
 	*/
 	void Update(){
-		
+		if (levelManager.state != LevelManager.UI_States.gameplay) return;
 
 		Jumping ();
 
