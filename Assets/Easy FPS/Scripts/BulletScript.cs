@@ -32,7 +32,7 @@ public class BulletScript : MonoBehaviour {
 					Instantiate(bloodEffect, hit.point, Quaternion.LookRotation(hit.normal));
 					if (hit.rigidbody.transform.gameObject.GetComponent<EnemyController>() != null)
                     {
-						hit.rigidbody.transform.gameObject.GetComponent<EnemyController>().TakeDamage(10);
+						hit.rigidbody.transform.gameObject.GetComponent<EnemyController>().TakeDamage(20);
                     }
 					
 					Destroy(gameObject);

@@ -80,25 +80,36 @@ public class PlayerMovementScript : MonoBehaviour {
 	void Jumping(){
 		if (Input.GetKeyDown (KeyCode.Space) && grounded) {
 			rb.AddRelativeForce (Vector3.up * jumpForce);
-			if (_jumpSound)
-				_jumpSound.Play ();
-			else
-				print ("Missig jump sound.");
-			_walkSound.Stop ();
-			_runSound.Stop ();
+			//if (levelManager.state != LevelManager.UI_States.gameplay)
+   //         {
+			//	_jumpSound.Stop();
+   //         }
+			//else if (_jumpSound)
+			//	_jumpSound.Play ();
+			//else
+			//	print ("Missig jump sound.");
+			//_walkSound.Stop ();
+			//_runSound.Stop ();
 		}
 	}
 	/*
 	* Update loop calling other stuff
 	*/
 	void Update(){
-		if (levelManager.state != LevelManager.UI_States.gameplay) return;
+		if (levelManager.state != LevelManager.UI_States.gameplay)
+		{
+			_jumpSound.Stop();
+			_walkSound.Stop();
+			_runSound.Stop();
+			//Debug.Log("Stopped walking/running sound");
+			return;
+		}
 
-		Jumping ();
+        Jumping();
 
 		Crouching();
 
-		WalkingSound ();
+		//WalkingSound ();
 
 
 	}//end update
@@ -118,7 +129,8 @@ public class PlayerMovementScript : MonoBehaviour {
 							_walkSound.Play ();
 							_runSound.Stop ();
 						}					
-					} else if (maxSpeed == 5) {
+					} 
+					else if (maxSpeed == 5) {
 						//	print ("NE tu sem");
 
 						if (!_runSound.isPlaying) {
@@ -126,15 +138,18 @@ public class PlayerMovementScript : MonoBehaviour {
 							_runSound.Play ();
 						}
 					}
-				} else {
+				} 
+				else {
 					_walkSound.Stop ();
 					_runSound.Stop ();
 				}
-			} else {
+			} 
+			else {
 				_walkSound.Stop ();
 				_runSound.Stop ();
 			}
-		} else {
+		} 
+		else {
 			print ("Missing walk and running sounds.");
 		}
 

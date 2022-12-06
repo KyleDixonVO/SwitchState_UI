@@ -127,8 +127,11 @@ public class GunInventory : MonoBehaviour {
 	 */
 	IEnumerator Spawn(int _redniBroj){
 
-
-		if (weaponChanging)
+		if (levelManager.state != LevelManager.UI_States.gameplay)
+        {
+			weaponChanging.Stop();
+        }
+		else if (weaponChanging)
 			weaponChanging.Play ();
 		else
 			print ("Missing Weapon Changing music clip.");

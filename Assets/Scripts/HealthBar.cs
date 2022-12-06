@@ -55,6 +55,7 @@ public class HealthBar : MonoBehaviour
         }
         else if (zombiesKilled >= gameplay.zombieSlider.value && levelManager.state == LevelManager.UI_States.gameplay)
         {
+            Debug.Log(zombiesKilled + " " + gameplay.zombieSlider.value);
             Debug.Log("Won Game");
             inputManager.Win = true;
         }
@@ -90,7 +91,7 @@ public class HealthBar : MonoBehaviour
     public void FadeJam()
     {
         if (health == maxHealth && jam.color.a == 0) return;
-        Debug.Log("Fading Jam");
+        //Debug.Log("Fading Jam");
         if ((health / maxHealth) < 0.25)
         {
             jam.DOFade(0.5f, 1);

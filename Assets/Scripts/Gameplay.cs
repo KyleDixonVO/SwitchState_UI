@@ -10,7 +10,7 @@ public class Gameplay : MonoBehaviour
     public LevelManager levelManager;
     public HealthBar healthBar;
     public Slider zombieSlider;
-    public int zombies;
+    public float zombies;
     public InputManager inputManager;
 
     // Start is called before the first frame update
@@ -29,7 +29,7 @@ public class Gameplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        zombies = (int)zombieSlider.value;
+        zombies = zombieSlider.value;
         if (levelManager.state != LevelManager.UI_States.gameplay) return;
         if (healthBar == null)
         {

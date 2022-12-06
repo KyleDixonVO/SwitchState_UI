@@ -220,9 +220,9 @@ public class GunScript : MonoBehaviour {
 	*/
 	void MeeleAttack(){	
 
-		if(Input.GetKeyDown(KeyCode.Q) && !meeleAttack){			
-			StartCoroutine("AnimationMeeleAttack");
-		}
+		//if(Input.GetKeyDown(KeyCode.Q) && !meeleAttack){			
+		//	StartCoroutine("AnimationMeeleAttack");
+		//}
 	}
 	/*
 	* Sets meele animation to play.
@@ -483,8 +483,9 @@ public class GunScript : MonoBehaviour {
 			yield return new WaitForSeconds (reloadChangeBulletsTime - 0.5f);//minus ovo vrijeme cekanja na yield
 			if (meeleAttack == false && pmS.maxSpeed != runningSpeed) {
 				//print ("tu sam");
-				if (player.GetComponent<PlayerMovementScript> ()._freakingZombiesSound)
-					player.GetComponent<PlayerMovementScript> ()._freakingZombiesSound.Play ();
+				if (player.GetComponent<PlayerMovementScript>()._freakingZombiesSound) 
+				{ }
+					//player.GetComponent<PlayerMovementScript> ()._freakingZombiesSound.Play ();
 				else
 					print ("Missing Freaking Zombies Sound");
 				

@@ -6,6 +6,7 @@ using TMPro;
 
 public class UI_Manager : MonoBehaviour
 {
+    public LevelManager levelManager;
     public Canvas mainMenu;
     public Canvas pause;
     public Canvas options;
@@ -15,11 +16,14 @@ public class UI_Manager : MonoBehaviour
     public Canvas credits;
     public Slider slider;
     public TMP_Text loadTimeText;
+    public TMP_Text zombiesRemainingTxt;
+    public HealthBar playerHealthBar;
 
     // Start is called before the first frame update
 
     private void Awake()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         mainMenu = GameObject.Find("MainMenuCanvas").GetComponent<Canvas>();
         pause = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
         options = GameObject.Find("OptionsCanvas").GetComponent<Canvas>();
@@ -38,6 +42,34 @@ public class UI_Manager : MonoBehaviour
     void Update()
     {
         loadTimeText.text = slider.value.ToString();
+
+        if (levelManager.returnFromOptions != LevelManager.UI_States.mainMenu)
+        {
+            slider.interactable = false;
+        }
+        else
+        {
+            slider.interactable = true;
+        }
+
+        if (levelManager.state == LevelManager.UI_States.mainMenu) 
+        {
+            zombiesRemainingTxt = null;
+            playerHealthBar = null;
+            return;
+        }
+
+        if (playerHealthBar == null || zombiesRemainingTxt == null)
+        {
+            playerHealthBar = GameObject.Find("Player").GetComponent<HealthBar>();
+            zombiesRemainingTxt = GameObject.Find("ZombiesLeftTxt").GetComponent<TMP_Text>();
+        }
+        else
+        {
+            //Debug.Log(slider.value + " " + playerHealthBar.zombiesKilled);
+            zombiesRemainingTxt.text = "Zombies left: " + (slider.value - playerHealthBar.zombiesKilled);
+        }
+        
     }
 
     public void MainMenu()

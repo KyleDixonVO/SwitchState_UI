@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
 
     public UI_Manager ui_Manager;
     public Gameplay gameplay;
+    public HealthBar playerHealthBar;
 
     public InputManager inputManager;
 
@@ -77,6 +78,11 @@ public class LevelManager : MonoBehaviour
     public void SwitchGameplay()
     {
         state = UI_States.gameplay;
+        gameplay.Reset();
+        if (playerHealthBar != null)
+        {
+            playerHealthBar.Reset();
+        }
         inputManager.EscapePressed = false;
     }
 
@@ -95,6 +101,10 @@ public class LevelManager : MonoBehaviour
     {
         state = UI_States.mainMenu;
         gameplay.Reset();
+        if (playerHealthBar != null)
+        {
+            playerHealthBar.Reset();
+        }
     }
 
     public void SwitchCredits()
@@ -133,6 +143,10 @@ public class LevelManager : MonoBehaviour
 
             case UI_States.gameplay:
                 ui_Manager.Gameplay();
+                if (playerHealthBar == null)
+                {
+                    playerHealthBar = GameObject.Find("Player").GetComponent<HealthBar>();
+                }
                 Time.timeScale = resumedScale;
                 break;
 
