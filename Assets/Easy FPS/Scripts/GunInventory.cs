@@ -195,12 +195,12 @@ public class GunInventory : MonoBehaviour {
 	 * From here I am listing thourhg guns I have and drawing corresponding images on the sceen.
 	 */
 	void OnGUI(){
-		if (levelManager.state != LevelManager.UI_States.gameplay) return;
-		if (currentGun){
-			for(int i = 0; i < gunsIHave.Count; i++){
-				DrawCorrespondingImage(i);
-			}
-		}
+		//if (levelManager.state != LevelManager.UI_States.gameplay) return;
+		//if (currentGun){
+		//	for(int i = 0; i < gunsIHave.Count; i++){
+		//		DrawCorrespondingImage(i);
+		//	}
+		//}
 
 	}
 
